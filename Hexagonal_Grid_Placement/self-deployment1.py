@@ -86,13 +86,12 @@ class IncrementalDeployment:
             if robot.deployed:
                 rx, ry = robot.position
                 
-                # Define square bounds around robot position
                 min_x = max(0, rx - radius)
                 max_x = min(self.grid_size[0] - 1, rx + radius)
                 min_y = max(0, ry - radius)
                 max_y = min(self.grid_size[1] - 1, ry + radius)
                 
-                # Loop over nearby cells within the bounding box
+        
                 for x in range(min_x, max_x + 1):
                     for y in range(min_y, max_y + 1):
                         # if self.occupancy_grid[x, y] == 0:  # Only consider free space
