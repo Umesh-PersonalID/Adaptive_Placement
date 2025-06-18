@@ -2,7 +2,7 @@ from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 
-img_path = "M_0036.png"
+img_path = "M_05619.png"
 image = Image.open(img_path).convert("L").resize((300, 300))  # Convert to grayscale and resize
 
 image_array = np.array(image)
@@ -17,7 +17,7 @@ img[unknown_mask] = [0.7, 0.7, 0.7]
 
 occupied_mask = grid == 1
 img[occupied_mask] = [0, 0, 0]       
-
+ 
 
 plt.imshow(img)
 plt.title("Grid Visualization")
