@@ -16,6 +16,7 @@ print(unknown_mask)
 img[unknown_mask] = [0.7, 0.7, 0.7] 
 
 occupied_mask = grid == 1
+
 img[occupied_mask] = [0, 0, 0]       
 
 

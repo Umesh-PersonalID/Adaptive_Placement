@@ -250,5 +250,5 @@ def visualize(deployment):
     plt.show()
 
 # Create and run simulation
-deployment = IncrementalDeployment(grid_size=(300,157), num_robots=64, sensor_range=15)
+deployment = IncrementalDeployment(grid_size=(300,157), num_robots=63, sensor_range=15)
 visualize(deployment)

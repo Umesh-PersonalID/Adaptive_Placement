@@ -8,8 +8,8 @@ from generate_grid_map1 import grid as occupancy_grid  # Import obstacle map
 # Sensor coverage problem using Simulated Annealing (SA) with obstacle avoidance
 
 GRID_SIZE = occupancy_grid.shape
-SENSOR_RADIUS = 4
-NUM_SENSORS = 70
+SENSOR_RADIUS = 15
+NUM_SENSORS = 138
 
 def get_covered_cells(x, y, radius, grid_size, occupancy_grid):
     """Return all cells covered by a sensor at (x, y), excluding obstacles."""
