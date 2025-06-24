@@ -5,7 +5,7 @@ import matplotlib.animation as animation
 from collections import deque
 import math
 from generate_grid_map9 import grid
-
+import time
 #Global Variable
 overlap = 0
 count = 0
@@ -245,10 +245,15 @@ def visualize(deployment):
         ax.grid(True, which='both', color='gray', linestyle='-', linewidth=0.5)
     
     ani = animation.FuncAnimation(fig, update, frames=deployment.num_robots+5, 
-                                interval=100, repeat=False)
+                                interval=150, repeat=False)
     # ani.save('my_animation4.mp4', writer='ffmpeg', fps=3)
     plt.show()
 
 # Create and run simulation
+start_time = time.time()
 deployment = IncrementalDeployment(grid_size=(300,157), num_robots=41, sensor_range=15)
 visualize(deployment)
+end_time = time.time()
+total_time = end_time - start_time
+
+print(f"Total Time : {total_time}")
