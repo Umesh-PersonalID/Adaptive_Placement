@@ -1,11 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from grid_generator_map1 import grid  # Assuming this is available
+from grid_generator_map3 import grid  # Assuming this is available
 import sys
 import matplotlib.animation as animation
-
+from numba import jit
 import time
-# Global Variables
+# Global Variablescd .
 overlap = 0
 count = 0
 total_grid_without_obstacle = 0
@@ -14,7 +14,7 @@ coverage_list = []
 overlap_list = []
 
 # Simulation settings
-NUM_NODES = 138
+NUM_NODES = 95
 SENSOR_RANGE = 10.0
 COMM_RANGE = 40.0
 AREA_SIZE = (200, 200)
@@ -23,7 +23,7 @@ TIME_STEPS = 10000
 DELTA_T = 0.05
 
 # Force parameters
-K_COVER = 26.0
+K_COVER = 25.0
 K_DEGREE = 60.0
 Q = 1
 V = 0.1

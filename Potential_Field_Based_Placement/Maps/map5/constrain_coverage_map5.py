@@ -1,11 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from grid_generator_map1 import grid  # Assuming this is available
+from grid_generator_map5 import grid  # Assuming this is available
 import sys
 import matplotlib.animation as animation
 
 import time
-# Global Variables
+# Global Variablescd .
 overlap = 0
 count = 0
 total_grid_without_obstacle = 0
@@ -14,16 +14,16 @@ coverage_list = []
 overlap_list = []
 
 # Simulation settings
-NUM_NODES = 138
+NUM_NODES = 73
 SENSOR_RANGE = 10.0
 COMM_RANGE = 40.0
 AREA_SIZE = (200, 200)
 K_NEIGHBORS = 6
 TIME_STEPS = 10000
-DELTA_T = 0.05
+DELTA_T = 0.03
 
 # Force parameters
-K_COVER = 26.0
+K_COVER = 25.0
 K_DEGREE = 60.0
 Q = 1
 V = 0.1
@@ -242,6 +242,7 @@ def visualize(deployment):
     step_counter = 0
 
     def update(frame):
+        global end_time
         nonlocal last_coverage, step_counter
         ax.clear()
         done = deployment.run_step()
@@ -273,6 +274,7 @@ def visualize(deployment):
                         f.write(f"{x:.2f}, {y:.2f}\n")
 
                 print("Coverage improvement below threshold. Stopping simulation.")
+                end_time = time.time()
                 ani.event_source.stop()
             last_coverage = coverage
             step_counter = 0  # Reset counter
@@ -282,12 +284,12 @@ def visualize(deployment):
 
     ani = animation.FuncAnimation(fig, update, frames=TIME_STEPS, interval=1)
     plt.show()
-
+end_time  = 0
 
 if __name__ == '__main__':
     start_time = time.time()
     deployment = ConstrainDeployment()
     visualize(deployment)
-    end_time = time.time()
+    
     taken_time = end_time - start_time
     print(f"Total time taken {taken_time:.2f} seconds")

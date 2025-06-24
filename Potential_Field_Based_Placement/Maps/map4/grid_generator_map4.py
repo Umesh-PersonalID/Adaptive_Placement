@@ -2,8 +2,8 @@ from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 
-img_path = "M_0036.png"
-image = Image.open(img_path).convert("L").resize((200, 200))  # Convert to grayscale and resize
+img_path = "M_0026.png"
+image = Image.open(img_path).convert("L").resize((200,105))  # Convert to grayscale and resize
 
 image_array = np.array(image)
 

@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from grid_generator_map1 import grid  # Assuming this is available
+from grid_generator_map9 import grid  # Assuming this is available
 import sys
 import matplotlib.animation as animation
 
@@ -14,13 +14,13 @@ coverage_list = []
 overlap_list = []
 
 # Simulation settings
-NUM_NODES = 138
+NUM_NODES = 55
 SENSOR_RANGE = 10.0
 COMM_RANGE = 40.0
-AREA_SIZE = (200, 200)
+AREA_SIZE = (105, 200)
 K_NEIGHBORS = 6
 TIME_STEPS = 10000
-DELTA_T = 0.05
+DELTA_T = 0.02
 
 # Force parameters
 K_COVER = 26.0

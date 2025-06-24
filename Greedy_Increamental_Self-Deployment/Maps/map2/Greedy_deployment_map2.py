@@ -217,7 +217,7 @@ class GreedyDeployment:
 
 
 # Run the deployment
-deployment = GreedyDeployment(grid_size=(157, 300), num_robots=64, sensor_range=15)
+deployment = GreedyDeployment(grid_size=(157, 300), num_robots=63, sensor_range=15)
 deployment.count_desired_area()
 
 for _ in range(deployment.num_robots):
