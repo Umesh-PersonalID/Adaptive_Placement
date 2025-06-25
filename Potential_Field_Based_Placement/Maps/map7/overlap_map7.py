@@ -31,25 +31,16 @@ class Robot:
                 dy = y - ny
                 distance_sq = dx ** 2 + dy ** 2
                 if distance_sq <= sensor_range_sq:
-                   
                     if occupancy_grid[nx][ny] == -1:
                         occupancy_grid[nx][ny] = 0  # Mark as covered
-                    
 
 
-def count_desired_area(occupancy_grid):
-    
-    global total_grid_without_obstacle
-    for y in range(len(occupancy_grid)):
-        for x in range(len(occupancy_grid[0])):
-            if occupancy_grid[y][x] == -1:
-                total_grid_without_obstacle += 1
-    return total_grid_without_obstacle
-        
+def count_desired_area(grid_data):
+    return np.sum(grid_data == -1)
 
-
+overlap = 0
 def calculate_overlap(grid_data, robot_positions, sensor_range):
-    global total_grid_without_obstacle
+    global overlap
     """Count overlapping cells due to multiple sensor coverage"""
     coverage_count = np.zeros_like(grid_data, dtype=int)
     for x, y in robot_positions:
@@ -64,12 +55,18 @@ def calculate_overlap(grid_data, robot_positions, sensor_range):
                 dx = x - nx
                 dy = y - ny
                 if dx * dx + dy * dy <= sensor_range_sq:
-                    # print(coverage_count[nx, ny])
                     coverage_count[nx, ny] += 1
-
+    for nx in range(len(coverage_count)):
+        for ny in range(len(coverage_count[0])):
+            if grid_data[nx][ny] != 1 and coverage_count[nx,ny] > 1:
+                overlap += coverage_count[nx][ny]
+    
+    print(overlap)
     overlap_cells = np.sum((coverage_count > 1) & (grid_data != 1))
-    total_free_cells = total_grid_without_obstacle
-    return overlap_cells / total_free_cells * 100
+    
+    total_free_cells = np.sum(grid_data == -1)
+    print(total_free_cells)
+    return overlap/total_free_cells * 100
 
 
 def deploy_robots_from_file(filename, sensor_range):

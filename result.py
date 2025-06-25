@@ -4,8 +4,8 @@ import numpy as np
 # Map labels
 maps = ['map1', 'map2', 'map3', 'map4', 'map5', 'map6', 'map7', 'map8', 'map9']
 
-# Coverage per node for each strategy
-greedy = [0.576, 1.196, 0.789, 1.336, 1.063, 0.982, 0.883, 0.726, 1.481]
+# Updated Coverage per node for each strategy
+greedy = [0.682, 1.474, 0.976, 1.645, 1.247, 1.097, 1.029, 0.918, 2.147]
 square = [0.531, 1.083, 0.768, 1.252, 1.079, 0.939, 0.851, 0.738, 1.561]
 constrained = [0.643, 1.238, 0.662, np.nan, 0.633, 0.567, 0.272, 0.476, 0.968]
 hexagonal = [0.712, 1.480, 0.987, 1.612, 1.293, 1.143, 1.045, 0.893, 1.953]

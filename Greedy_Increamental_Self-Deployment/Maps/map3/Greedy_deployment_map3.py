@@ -5,11 +5,14 @@ from collections import deque
 import math
 from matplotlib.colors import ListedColormap
 from grid_generator_map3 import grid
+import time
 
 overlap = 0
 total_grid_without_obstacle = 0
 coverage_list = []
 overlap_list = []
+start_time = 0
+end_time = 0
 
 class Robot:
     def __init__(self, id, position, sensor_range, deployment=None):
@@ -19,26 +22,31 @@ class Robot:
         self.deployed = False
         self.deployment = deployment
 
-    def sense(self, occupancy_grid):
+    def sense(self, occupancy_grid, reachability_check):
         global global_sensor_range
         global_sensor_range = self.sensor_range
         x, y = self.position
         sensor_range_sq = self.sensor_range ** 2
-        min_x = max(0, x - self.sensor_range)
-        max_x = min(occupancy_grid.shape[0] - 1, x + self.sensor_range)
-        min_y = max(0, y - self.sensor_range)
-        max_y = min(occupancy_grid.shape[1] - 1, y + self.sensor_range)
+        min_x = max(0, x - 2*self.sensor_range)
+        max_x = min(occupancy_grid.shape[0] - 1, x + 2*self.sensor_range)
+        min_y = max(0, y - 2*self.sensor_range)
+        max_y = min(occupancy_grid.shape[1] - 1, y + 2*self.sensor_range)
 
         for nx in range(int(min_x), int(max_x) + 1):
             for ny in range(int(min_y), int(max_y) + 1):
                 dx = x - nx
                 dy = y - ny
                 distance_sq = dx**2 + dy**2
+                if distance_sq <= 3 * sensor_range_sq:
+                    if occupancy_grid[nx][ny] == -1:
+                        reachability_check[nx][ny] = 0
+
                 if distance_sq <= sensor_range_sq:
                     if occupancy_grid[nx][ny] == -1:
                         occupancy_grid[nx][ny] = 0
                     if hasattr(self, 'deployment'):
                         self.deployment.sensing_map[nx][ny] += 1
+                
 
 
 class GreedyDeployment:
@@ -48,6 +56,7 @@ class GreedyDeployment:
         self.sensor_range = sensor_range
         self.occupancy_grid = grid
         self.reachability_grid = np.zeros(grid_size)
+        self.reachability_check = grid.copy()
         self.sensing_map = np.zeros(grid_size)
         self.robots = [Robot(i, (0, 0), sensor_range, self) for i in range(num_robots)]
         
@@ -65,7 +74,7 @@ class GreedyDeployment:
 
         self.robots[0].position = (sensor_range, sensor_range)
         self.robots[0].deployed = True
-        self.robots[0].sense(self.occupancy_grid)
+        self.robots[0].sense(self.occupancy_grid, self.reachability_check)
         self.update_reachability()
         
         self.init_visualization()
@@ -133,13 +142,14 @@ class GreedyDeployment:
             for dx, dy in directions:
                 nx, ny = x + dx, y + dy
                 if 0 <= nx < self.grid_size[0] and 0 <= ny < self.grid_size[1]:
-                    if self.occupancy_grid[nx, ny] == 0 and self.reachability_grid[nx, ny] == 0:
+                    if self.reachability_check[nx, ny] == 0 and self.reachability_grid[nx, ny] == 0:
                         self.reachability_grid[nx, ny] = 1
                         queue.append((nx, ny))
 
+
     def frontier_cells(self):
         frontier = []
-        directions = [(1,0), (-1,0), (0,1), (0,-1)]
+        directions = [(1,0), (-1,0), (0,1), (0,-1), (1,1), (1,-1), (-1,1), (-1,-1)]
         for x in range(self.grid_size[0]):
             for y in range(self.grid_size[1]):
                 if self.reachability_grid[x, y] == 1:
@@ -180,7 +190,7 @@ class GreedyDeployment:
                 if not robot.deployed:
                     robot.position = best_pos
                     robot.deployed = True
-                    robot.sense(self.occupancy_grid)
+                    robot.sense(self.occupancy_grid, self.reachability_check)
                     self.update_reachability()
                     self.calculate_overlap(best_pos)
                     self.coverage()
@@ -217,12 +227,14 @@ class GreedyDeployment:
 
 
 # Run the deployment
+start_time  = time.time()
 deployment = GreedyDeployment(grid_size=(300, 300), num_robots=95, sensor_range=15)
 deployment.count_desired_area()
 
 for _ in range(deployment.num_robots):
     if not deployment.deploy_next():
         break
+
 
 coverage = coverage_list[-1]
 overlap_pct = overlap_list[-1]
@@ -234,6 +246,9 @@ df = pd.DataFrame({
     'Value': [coverage, overlap_pct, deployed_nodes]
 })
 print(df.to_string(index=False))
+
+end_time = time.time()
+print(end_time - start_time)
 
 ani = deployment.create_animation()
 

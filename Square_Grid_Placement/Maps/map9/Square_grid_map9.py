@@ -5,7 +5,7 @@ import matplotlib.animation as animation
 from collections import deque
 import math
 from Grid_generator_map9 import grid
-
+import time
 
 overlap = 0
 count = 0
@@ -31,13 +31,13 @@ class IncrementalDeployment:
         self.robots = []
         self.initialize_robots()
         if self.robots:
-            self.robots[0].position = (15,36)
+            self.robots[0].position = (int(self.sensor_range), 40)
             self.robots[0].deployed = True
             self.update_grids()
     
     def initialize_robots(self):
         for i in range(self.num_robots):
-            self.robots.append(Robot(i, (15,36), self.sensor_range))
+            self.robots.append(Robot(i, (int(self.sensor_range), 40), self.sensor_range))
     
     def count_desired_area(self):
         global total_grid_without_obstacle
@@ -130,7 +130,6 @@ class IncrementalDeployment:
                 if (x <= len(self.occupancy_grid) and y <= len(self.occupancy_grid[0]) and self.occupancy_grid[x][y] != 1):
                     centers.append((x, y))
         count+=1
-        print((centers))
         return centers[count % len(centers)]
 
 
@@ -210,6 +209,13 @@ def visualize(deployment):
     def update(frame):
         ax.clear()
     
+        if frame == deployment.num_robots:
+            end_time = time.time()
+            print(f"Total Time : {end_time - start_time}")
+            ani.event_source.stop() 
+            plt.close(fig)           
+            return
+        
         if frame > 0:
             deployment.run_step()
             deployment.save_occupancy_grid_to_file("occupancy_hexagonal.txt")
@@ -248,12 +254,14 @@ def visualize(deployment):
         ax.set_ylim(-0.5, deployment.grid_size[1]-0.5)
         ax.grid(True, which='both', color='gray', linestyle='-', linewidth=0.5)
     
-    ani = animation.FuncAnimation(fig, update, frames=deployment.num_robots+2, 
-                                interval=20, repeat=False)
+    ani = animation.FuncAnimation(fig, update, frames=deployment.num_robots+1, 
+                                interval=150, repeat=False)
     # ani.save('my_animation4.mp4', writer='ffmpeg', fps=3)
     plt.show()
 
 
 # Create and run simulation
+start_time = time.time()
+end_time = time.time()
 deployment = IncrementalDeployment(grid_size=(300,157), num_robots=60, sensor_range=15)
 visualize(deployment)
