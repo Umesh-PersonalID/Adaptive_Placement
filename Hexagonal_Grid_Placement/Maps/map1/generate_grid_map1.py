@@ -8,3 +8,5 @@ image = Image.open(img_path).convert("L").resize((300, 300))  # Convert to grays
 image_array = np.array(image)
 
 grid = np.where(image_array < 128, 1, -1)
+
+unknown_mask = grid == -1
