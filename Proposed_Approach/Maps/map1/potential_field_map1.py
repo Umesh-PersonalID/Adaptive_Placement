@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from grid_generator_map1 import grid  # Assuming this is available
+from grid_generator_map1 import grid 
 import sys
 import matplotlib.animation as animation
 

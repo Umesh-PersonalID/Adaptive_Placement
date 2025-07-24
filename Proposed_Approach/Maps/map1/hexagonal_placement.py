@@ -175,7 +175,7 @@ class Robot:
         global global_sensor_range
         
         global_sensor_range = self.sensor_range
-        x, y = int(self.position[1]), int(self.position[0])
+        x, y = self.position
         sensor_range_sq = self.sensor_range ** 2
         overlap_increased = 0
         min_x = max(0, x - self.sensor_range)

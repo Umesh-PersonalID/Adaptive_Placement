@@ -23,8 +23,6 @@ class Robot:
         self.deployment = deployment
 
     def sense(self, occupancy_grid, reachability_check):
-        global global_sensor_range
-        global_sensor_range = self.sensor_range
         x, y = self.position
         sensor_range_sq = self.sensor_range ** 2
         min_x = max(0, x - 2*self.sensor_range)
@@ -137,7 +135,7 @@ class GreedyDeployment:
                 self.reachability_grid[x, y] = 1
                 queue.append((x, y))
 
-        while queue:
+        while queue: 
             x, y = queue.popleft()
             for dx, dy in directions:
                 nx, ny = x + dx, y + dy

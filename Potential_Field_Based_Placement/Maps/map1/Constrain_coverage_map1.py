@@ -23,8 +23,8 @@ TIME_STEPS = 10000
 DELTA_T = 0.02
 
 # Force parameters
-K_COVER = 1.5
-K_DEGREE = 5.0
+K_COVER = float(sys.argv[1]) if len(sys.argv) > 1 else 1.5
+K_DEGREE = 0.0625*K_COVER
 Q = 1
 V = 0.1
 MASS = 1.0
@@ -198,7 +198,24 @@ class ConstrainDeployment:
         forces = compute_forces(self.positions, neighbors)
         accels = forces / MASS
         self.velocities = (1 - V) * self.velocities + accels * DELTA_T
-        new_positions = self.positions + self.velocities * DELTA_T
+        
+        # Calculate new positions based on velocity
+        proposed_positions = self.positions + self.velocities * DELTA_T
+
+        # Compute displacement vectors
+        displacements = proposed_positions - self.positions
+        displacement_norms = np.linalg.norm(displacements, axis=1, keepdims=True)
+
+        # Avoid division by zero
+        displacement_norms = np.maximum(displacement_norms, 1e-8)
+
+        # Cap max movement per step
+        MAX_STEP = 5.0
+        scaling_factors = np.minimum(1.0, MAX_STEP / displacement_norms)
+        clipped_displacements = displacements * scaling_factors
+
+        # Apply clipped displacements
+        new_positions = self.positions + clipped_displacements
         new_positions = np.clip(new_positions, [0, 0], AREA_SIZE)
 
         for i in range(self.num_robots):
@@ -269,11 +286,15 @@ def visualize(deployment):
 
                 print("Coverage improvement below threshold. Stopping simulation.")
                 ani.event_source.stop()
+                plt.savefig("last_frame.png")
+                plt.close('all')
             last_coverage = coverage
             step_counter = 0  # Reset counter
 
         if done:
             ani.event_source.stop()
+            plt.savefig("last_frame.png")
+            plt.close('all')
 
     ani = animation.FuncAnimation(fig, update, frames=TIME_STEPS, interval=1)
     plt.show()
