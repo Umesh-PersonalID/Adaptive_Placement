@@ -25,7 +25,6 @@ class IncrementalDeployment:
         self.occupancy_grid = grid
         self.reachability_grid = np.zeros(grid_size)
         
-        print(self.sensor_range,self.sensor_range)
         self.robots = []
         self.initialize_robots()
         if self.robots:
@@ -37,12 +36,6 @@ class IncrementalDeployment:
         for i in range(self.num_robots):
             self.robots.append(Robot(i, (self.sensor_range,self.sensor_range), self.sensor_range))
     
-    def count_desired_area(self):
-        global total_grid_without_obstacle
-        for y in range(len(self.occupancy_grid)):
-            for x in range(len(self.occupancy_grid[0])):
-                if self.occupancy_grid[y][x] == -1:
-                    total_grid_without_obstacle += 1
     
     
     def update_grids(self):
@@ -128,7 +121,7 @@ class IncrementalDeployment:
                 if (x <= len(self.occupancy_grid) and y <= len(self.occupancy_grid[0]) and self.occupancy_grid[x][y] != 1):
                     centers.append((x, y))
         count+=1
-        print(centers)
+       
         return centers[count % len(centers)]
 
 
@@ -198,20 +191,27 @@ class Robot:
                     if occupancy_grid[nx, ny] == -1:
                         occupancy_grid[nx, ny] = 0
 
+
+def count_desired_area():
+    global total_grid_without_obstacle
+    for y in range(len(grid)):
+        for x in range(len(grid[0])):
+            if grid[y][x] == -1:
+                total_grid_without_obstacle += 1
+
 # Visualization
 def visualize(deployment):
     global total_grid_without_obstacle, overlap
-    deployment.count_desired_area()
     fig, ax = plt.subplots(figsize=(12, 8))
     def update(frame):
         ax.clear()
     
-        if frame == deployment.num_robots:
-            end_time = time.time()
-            print(f"Total Time : {end_time - start_time}")
-            ani.event_source.stop() 
-            plt.close(fig)           
-            return
+        # if frame == deployment.num_robots:
+        #     end_time = time.time()
+        #     print(f"Total Time : {end_time - start_time}")
+        #     ani.event_source.stop() 
+        #     plt.close(fig)           
+        #     return
     
         if frame > 0:
             deployment.run_step()
@@ -260,6 +260,7 @@ def visualize(deployment):
 
 # Create and run simulation
 start_time = time.time()
+count_desired_area()
 end_time = time.time()
-deployment = IncrementalDeployment(grid_size=(300, 300), num_robots=138, sensor_range=15)
+deployment = IncrementalDeployment(grid_size=(300, 300), num_robots=137, sensor_range=15)
 visualize(deployment)

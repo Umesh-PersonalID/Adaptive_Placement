@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 img_path = "M_0036.png"
-image = Image.open(img_path).convert("L").resize((200, 200))  # Convert to grayscale and resize
+image = Image.open(img_path).convert("L").resize((300, 300))  # Convert to grayscale and resize
 
 image_array = np.array(image)
 

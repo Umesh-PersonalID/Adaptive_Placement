@@ -15,6 +15,7 @@ overlap_list = []
 
 # Simulation settings
 NUM_NODES = 138
+<<<<<<< HEAD
 SENSOR_RANGE = 10.0
 COMM_RANGE = 20.0
 AREA_SIZE = (200, 200)
@@ -26,6 +27,19 @@ DELTA_T = 0.05
 K_COVER = 0.1
 K_DEGREE = 0.4
 Q = 0.9
+=======
+SENSOR_RANGE = 15.0
+COMM_RANGE = 25.96
+AREA_SIZE = (300, 300)
+K_NEIGHBORS = 6
+TIME_STEPS = 10000
+DELTA_T = 0.02
+
+# Force parameters
+K_COVER = float(sys.argv[1]) if len(sys.argv) > 1 else 1.5
+K_DEGREE = 0.0625*K_COVER
+Q = 1
+>>>>>>> aa4c9ddc5f6317a4d849a8946a6bf2d18628c52b
 V = 0.1
 MASS = 1.0
 
@@ -35,29 +49,27 @@ coverage_check_interval = 1000
 coverage_threshold = 0.5  # percent
 
 
-np.random.seed(42)
+np.random.seed(46)
 center_x, center_y = int(AREA_SIZE[0] / 2), int(AREA_SIZE[1] / 2)
 
 if grid[center_x][center_y] == 1:
     print("Obstacle at the starting position. Exiting.")
     sys.exit(1)
 
-# Generate initial positions avoiding obstacles
+
 positions = []
 while len(positions) < NUM_NODES:
-    pos = np.random.rand(2) * 6 + [center_x - 3, center_y - 3]
+    pos = np.random.rand(2) * 10 + [center_x - 5, center_y - 5]
     x, y = int(pos[0]), int(pos[1])
     if 0 <= x < grid.shape[0] and 0 <= y < grid.shape[1] and grid[x][y] != 1:
         positions.append(pos)
 positions = np.array(positions)
 velocities = np.zeros_like(positions)
+
 final_position = []
 
 def distance(p1, p2):
     return np.linalg.norm(p1 - p2)
-
-
-from scipy.spatial import KDTree
 
 
 def get_neighbors(pos):
@@ -79,29 +91,36 @@ def compute_forces(pos, neighbors):
         dists = [(j, distance(pos[i], pos[j])) for j in nbrs]
         sorted_nbrs = sorted(dists, key=lambda x: x[1])
         critical = [j for j, _ in sorted_nbrs[:K_NEIGHBORS]]
-        if len(nbrs) > K_NEIGHBORS:
-            
+        if len(nbrs) > K_NEIGHBORS: 
             for j, d in dists:
                 if d == 0:
                     continue
+<<<<<<< HEAD
                 if d < 2 * SENSOR_RANGE:
                     f = (K_COVER ) / (d ** 2 + 1e-5)
+=======
+                if d < COMM_RANGE:
+                    f = (K_COVER) / (d ** 2 + 1e-5)
+>>>>>>> aa4c9ddc5f6317a4d849a8946a6bf2d18628c52b
                     dir = (pos[i] - pos[j]) / d
                     forces[i] += f * dir
         else:
             count +=1
-            
             for j, d in dists:
                 if d == 0:
                     continue
                 dir = (pos[j] - pos[i]) / d
+<<<<<<< HEAD
                 if d < 2 * SENSOR_RANGE:
                     f = (K_COVER ) / (d ** 2 + 1e-5)
+=======
+                if d <= COMM_RANGE:
+                    f = (K_COVER + 2*d) / (d ** 2 + 1e-5)
+>>>>>>> aa4c9ddc5f6317a4d849a8946a6bf2d18628c52b
                     forces[i] -= f * dir
-                if j in critical and (d >= Q * COMM_RANGE or d >= (Q - 0.1) * COMM_RANGE):
+                if j in critical and d >= (Q - 0.1) * COMM_RANGE:
                     f = K_DEGREE / ((COMM_RANGE - d) ** 2 + 1e-5)
                     forces[i] += f * dir
-   
     return forces
 
 
@@ -203,31 +222,48 @@ class ConstrainDeployment:
         forces = compute_forces(self.positions, neighbors)
         accels = forces / MASS
         self.velocities = (1 - V) * self.velocities + accels * DELTA_T
-        new_positions = self.positions + self.velocities * DELTA_T
+        
+        # Calculate new positions based on velocity
+        proposed_positions = self.positions + self.velocities * DELTA_T
+
+        # Compute displacement vectors
+        displacements = proposed_positions - self.positions
+        displacement_norms = np.linalg.norm(displacements, axis=1, keepdims=True)
+
+        # Avoid division by zero
+        displacement_norms = np.maximum(displacement_norms, 1e-8)
+
+        # Cap max movement per step
+        MAX_STEP = 5.0
+        scaling_factors = np.minimum(1.0, MAX_STEP / displacement_norms)
+        clipped_displacements = displacements * scaling_factors
+
+        # Apply clipped displacements
+        new_positions = self.positions + clipped_displacements
         new_positions = np.clip(new_positions, [0, 0], AREA_SIZE)
 
         for i in range(self.num_robots):
-            if is_in_obstacle(new_positions[i], self.grid):
-                normal = get_obstacle_boundary_normal(self.positions[i], self.grid)
-                if normal is not None:
-                    tangential_force = project_to_tangent(forces[i], normal)
-                    tangential_accel = tangential_force / MASS
-                    self.velocities[i] = (1 - V) * self.velocities[i] + tangential_accel * DELTA_T
-                    new_positions[i] = self.positions[i] + self.velocities[i] * DELTA_T
-                    new_positions[i] = np.clip(new_positions[i], [0, 0], AREA_SIZE)
+            # if is_in_obstacle(new_positions[i], self.grid):
+            #     normal = get_obstacle_boundary_normal(self.positions[i], self.grid)
+            #     if normal is not None:
+            #         tangential_force = project_to_tangent(forces[i], normal)
+            #         tangential_accel = tangential_force / MASS
+            #         self.velocities[i] = (1 - V) * self.velocities[i] + tangential_accel * DELTA_T
+            #         new_positions[i] = self.positions[i] + self.velocities[i] * DELTA_T
+            #         new_positions[i] = np.clip(new_positions[i], [0, 0], AREA_SIZE)
 
-                if is_in_obstacle(new_positions[i], self.grid):  # Fallback
-                    safe_pos = self.find_safe_position(new_positions[i])
-                    if safe_pos is not None:
-                        new_positions[i] = safe_pos
-                    else:
-                        self.velocities[i] *= 0  # Stop
+            #     if is_in_obstacle(new_positions[i], self.grid):  # Fallback
+            #         safe_pos = self.find_safe_position(new_positions[i])
+            #         if safe_pos is not None:
+            #             new_positions[i] = safe_pos
+            #         else:
+            #             self.velocities[i] *= 0  # Stop
 
             self.robots[i].position = new_positions[i]
 
         self.positions = new_positions
         self.update_occupancy()
-        return all_have_k_neighbors(neighbors) and is_velocity_stable(self.velocities)
+        # return all_have_k_neighbors(neighbors) and is_velocity_stable(self.velocities)
 
     def count_coverage(self):
         return np.sum(self.grid == 0)
@@ -274,11 +310,15 @@ def visualize(deployment):
 
                 print("Coverage improvement below threshold. Stopping simulation.")
                 ani.event_source.stop()
+                plt.savefig("last_frame.png")
+                plt.close('all')
             last_coverage = coverage
             step_counter = 0  # Reset counter
 
         if done:
             ani.event_source.stop()
+            plt.savefig("last_frame.png")
+            plt.close('all')
 
     ani = animation.FuncAnimation(fig, update, frames=TIME_STEPS, interval=1)
     plt.show()

@@ -1,0 +1,12 @@
+[Coverage Check] Last: 0.00%, Current: 6.26%, Improvement: 6.26%
+[Coverage Check] Last: 6.26%, Current: 7.45%, Improvement: 1.19%
+[Coverage Check] Last: 7.45%, Current: 8.34%, Improvement: 0.89%
+[Coverage Check] Last: 8.34%, Current: 9.05%, Improvement: 0.71%
+[Coverage Check] Last: 9.05%, Current: 9.71%, Improvement: 0.66%
+[Coverage Check] Last: 9.71%, Current: 10.26%, Improvement: 0.54%
+[Coverage Check] Last: 10.26%, Current: 10.78%, Improvement: 0.53%
+[Coverage Check] Last: 10.78%, Current: 11.25%, Improvement: 0.47%
+Coverage improvement below threshold. Stopping simulation.
+Total time taken 1285.18 seconds
+
+==== STDERR ====

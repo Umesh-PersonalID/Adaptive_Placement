@@ -1,0 +1,18 @@
+[Coverage Check] Last: 0.00%, Current: 13.33%, Improvement: 13.33%
+[Coverage Check] Last: 13.33%, Current: 17.14%, Improvement: 3.81%
+[Coverage Check] Last: 17.14%, Current: 19.97%, Improvement: 2.84%
+[Coverage Check] Last: 19.97%, Current: 22.33%, Improvement: 2.35%
+[Coverage Check] Last: 22.33%, Current: 24.33%, Improvement: 2.00%
+[Coverage Check] Last: 24.33%, Current: 26.18%, Improvement: 1.85%
+[Coverage Check] Last: 26.18%, Current: 27.76%, Improvement: 1.58%
+[Coverage Check] Last: 27.76%, Current: 28.96%, Improvement: 1.20%
+[Coverage Check] Last: 28.96%, Current: 30.02%, Improvement: 1.07%
+[Coverage Check] Last: 30.02%, Current: 30.77%, Improvement: 0.75%
+[Coverage Check] Last: 30.77%, Current: 31.58%, Improvement: 0.81%
+[Coverage Check] Last: 31.58%, Current: 32.19%, Improvement: 0.61%
+[Coverage Check] Last: 32.19%, Current: 32.83%, Improvement: 0.64%
+[Coverage Check] Last: 32.83%, Current: 33.26%, Improvement: 0.43%
+Coverage improvement below threshold. Stopping simulation.
+Total time taken 1855.29 seconds
+
+==== STDERR ====
