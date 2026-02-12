@@ -221,7 +221,7 @@ class GreedyDeployment:
         return covered
 
     def create_animation(self):
-        ani = animation.ArtistAnimation(self.fig, self.animation_frames, interval=150, 
+        ani = animation.ArtistAnimation(self.fig, self.animation_frames, interval=2, 
                                        blit=True, repeat_delay=1000)
         return ani
 

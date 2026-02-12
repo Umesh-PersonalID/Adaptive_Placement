@@ -16,16 +16,16 @@ overlap_list = []
 # Simulation settings
 NUM_NODES = 138
 SENSOR_RANGE = 10.0
-COMM_RANGE = 40.0
+COMM_RANGE = 20.0
 AREA_SIZE = (200, 200)
 K_NEIGHBORS = 6
-TIME_STEPS = 10000
+TIME_STEPS = 10
 DELTA_T = 0.05
 
 # Force parameters
-K_COVER = 26.0
-K_DEGREE = 60.0
-Q = 1
+K_COVER = 0.1
+K_DEGREE = 0.4
+Q = 0.9
 V = 0.1
 MASS = 1.0
 
@@ -85,7 +85,7 @@ def compute_forces(pos, neighbors):
                 if d == 0:
                     continue
                 if d < 2 * SENSOR_RANGE:
-                    f = (K_COVER + 2*d) / (d ** 2 + 1e-5)
+                    f = (K_COVER ) / (d ** 2 + 1e-5)
                     dir = (pos[i] - pos[j]) / d
                     forces[i] += f * dir
         else:
@@ -96,7 +96,7 @@ def compute_forces(pos, neighbors):
                     continue
                 dir = (pos[j] - pos[i]) / d
                 if d < 2 * SENSOR_RANGE:
-                    f = (K_COVER + 2*d) / (d ** 2 + 1e-5)
+                    f = (K_COVER ) / (d ** 2 + 1e-5)
                     forces[i] -= f * dir
                 if j in critical and (d >= Q * COMM_RANGE or d >= (Q - 0.1) * COMM_RANGE):
                     f = K_DEGREE / ((COMM_RANGE - d) ** 2 + 1e-5)

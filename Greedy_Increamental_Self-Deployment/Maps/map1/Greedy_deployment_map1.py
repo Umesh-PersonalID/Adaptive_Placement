@@ -251,5 +251,7 @@ end_time = time.time()
 print(end_time - start_time)
 
 ani = deployment.create_animation()
+# Save the animation as an MP4 file
+ani.save('robot_deployment_animation.mp4', writer='ffmpeg', fps=5, dpi=150)
 
 plt.show()
