@@ -152,7 +152,7 @@ class GreedyDeployment:
         directions = [(1,0), (-1,0), (0,1), (0,-1), (1,1), (1,-1), (-1,1), (-1,-1)]
         for x in range(self.grid_size[0]):
             for y in range(self.grid_size[1]):
-                if self.reachability_grid[x, y] == 1:
+                if self.reachability_grid[x, y] == 1:   
                     for dx, dy in directions:
                         nx, ny = x + dx, y + dy
                         if (0 <= nx < self.grid_size[0] and 0 <= ny < self.grid_size[1] and
