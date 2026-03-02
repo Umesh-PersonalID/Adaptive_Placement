@@ -12,7 +12,7 @@ square = [0.531, 1.083, 0.768, 1.252, 1.079, 0.939, 0.851, 0.738, 1.561]
 constrained = [0.643, 1.238, 0.662, np.nan, 0.633, 0.567, 0.272, 0.476, 0.968]
 hexagonal = [0.712, 1.480, 0.987, 1.612, 1.293, 1.143, 1.045, 0.893, 1.953]
 hex_plus_constrained = [0.7166, 1.5143, 1.0036, 0.0000, 1.2915, 1.1561, 1.0810, 0.9028, 2.0098]
-
+sampling_based_HGP = [0.69, 1.46,0.87,1.56,1.15,1.06,0.92, 0.81, 1.56]
 # Setup
 x = np.arange(len(maps))  # Maps as x-axis
 width = 0.15
@@ -24,6 +24,7 @@ ax.bar(x - width, square, width, label='Square Grid')
 ax.bar(x, constrained, width, label='Constrained')
 ax.bar(x + width, hexagonal, width, label='Hexagonal')
 ax.bar(x + 2 * width, hex_plus_constrained, width, label='Hex + Constrained')
+ax.bar(x + 3 * width, sampling_based_HGP, width, label='Sampling-based HGP')
 
 ax.set_ylabel('Coverage per Node')
 ax.set_xlabel('Maps')

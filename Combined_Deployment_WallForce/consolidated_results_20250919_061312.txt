@@ -1,0 +1,155 @@
+COST-BASED DEPLOYMENT EXPERIMENT RESULTS
+============================================================
+Experiment Date: 2025-09-19 06:13:12
+Maps Processed: 14-22 (9 maps)
+Cost Threshold: 5.0
+Hexagonal Density: ~50% (every other coordinate)
+============================================================
+
+SUMMARY TABLE
+--------------------------------------------------------------------------------
+Map    Status       Nodes  Coverage   Overlap   Cost     Time(s)  Stopped By     
+--------------------------------------------------------------------------------
+1      SUCCESS      142    55.31      3.82      5.1394   11500.5  COMPLETED      
+2      SUCCESS      66     55.44      3.22      2.3433   1330.5   COMPLETED      
+3      FAILED       0      0.00       0.00      0.0000   0.4      UNKNOWN        
+4      FAILED       0      0.00       0.00      0.0000   0.4      UNKNOWN        
+5      FAILED       0      0.00       0.00      0.0000   0.4      UNKNOWN        
+6      FAILED       0      0.00       0.00      0.0000   0.4      UNKNOWN        
+7      FAILED       0      0.00       0.00      0.0000   0.4      UNKNOWN        
+8      FAILED       0      0.00       0.00      0.0000   0.4      UNKNOWN        
+9      FAILED       0      0.00       0.00      0.0000   0.4      UNKNOWN        
+--------------------------------------------------------------------------------
+Total Execution Time: 12833.9s (213.9 min)
+Successful Maps: 2/9
+
+
+DETAILED RESULTS
+============================================================
+
+MAP 1:
+  Status: SUCCESS
+  Execution Time: 11500.49s
+  Deployed Nodes: 142
+  Final Coverage: 55.31%
+  Final Overlap: 3.82%
+  Final Cost: 5.1394
+  Stopping Condition: COMPLETED
+  Iterations: 75
+  Cost Evolution: [1.047, 1.245, 1.252, 2.068, 5.139]
+
+MAP 2:
+  Status: SUCCESS
+  Execution Time: 1330.45s
+  Deployed Nodes: 66
+  Final Coverage: 55.44%
+  Final Overlap: 3.22%
+  Final Cost: 2.3433
+  Stopping Condition: COMPLETED
+  Iterations: 36
+  Cost Evolution: [0.57, 1.49, 1.429, 7.919, 2.343]
+
+MAP 3:
+  Status: FAILED
+  Execution Time: 0.42s
+  Deployed Nodes: 0
+  Final Coverage: 0.00%
+  Final Overlap: 0.00%
+  Final Cost: 0.0000
+  Stopping Condition: UNKNOWN
+  Iterations: 0
+  Error: Traceback (most recent call last):
+  File "greedy+potential_map3.py", line 39, in <module>
+    with open("position.txt", "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'position.txt'
+
+
+MAP 4:
+  Status: FAILED
+  Execution Time: 0.42s
+  Deployed Nodes: 0
+  Final Coverage: 0.00%
+  Final Overlap: 0.00%
+  Final Cost: 0.0000
+  Stopping Condition: UNKNOWN
+  Iterations: 0
+  Error: Traceback (most recent call last):
+  File "greedy+potential_map4.py", line 39, in <module>
+    with open("position.txt", "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'position.txt'
+
+
+MAP 5:
+  Status: FAILED
+  Execution Time: 0.43s
+  Deployed Nodes: 0
+  Final Coverage: 0.00%
+  Final Overlap: 0.00%
+  Final Cost: 0.0000
+  Stopping Condition: UNKNOWN
+  Iterations: 0
+  Error: Traceback (most recent call last):
+  File "greedy+potential_map5.py", line 39, in <module>
+    with open("position.txt", "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'position.txt'
+
+
+MAP 6:
+  Status: FAILED
+  Execution Time: 0.40s
+  Deployed Nodes: 0
+  Final Coverage: 0.00%
+  Final Overlap: 0.00%
+  Final Cost: 0.0000
+  Stopping Condition: UNKNOWN
+  Iterations: 0
+  Error: Traceback (most recent call last):
+  File "greedy+potential_map6.py", line 39, in <module>
+    with open("position.txt", "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'position.txt'
+
+
+MAP 7:
+  Status: FAILED
+  Execution Time: 0.39s
+  Deployed Nodes: 0
+  Final Coverage: 0.00%
+  Final Overlap: 0.00%
+  Final Cost: 0.0000
+  Stopping Condition: UNKNOWN
+  Iterations: 0
+  Error: Traceback (most recent call last):
+  File "greedy+potential_map7.py", line 39, in <module>
+    with open("position.txt", "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'position.txt'
+
+
+MAP 8:
+  Status: FAILED
+  Execution Time: 0.44s
+  Deployed Nodes: 0
+  Final Coverage: 0.00%
+  Final Overlap: 0.00%
+  Final Cost: 0.0000
+  Stopping Condition: UNKNOWN
+  Iterations: 0
+  Error: Traceback (most recent call last):
+  File "greedy+potential_map8.py", line 39, in <module>
+    with open("position.txt", "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'position.txt'
+
+
+MAP 9:
+  Status: FAILED
+  Execution Time: 0.42s
+  Deployed Nodes: 0
+  Final Coverage: 0.00%
+  Final Overlap: 0.00%
+  Final Cost: 0.0000
+  Stopping Condition: UNKNOWN
+  Iterations: 0
+  Error: Traceback (most recent call last):
+  File "greedy+potential_map9.py", line 39, in <module>
+    with open("position.txt", "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'position.txt'
+

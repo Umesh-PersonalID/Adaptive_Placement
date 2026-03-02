@@ -264,3 +264,7 @@ count_desired_area()
 end_time = time.time()
 deployment = IncrementalDeployment(grid_size=(300, 300), num_robots=137, sensor_range=15)
 visualize(deployment)
+with open("Final_Position.txt", "w") as f:
+        for r in deployment.robots:
+            if r.deployed:
+                f.write(f"{r.position[0]:.2f}, {r.position[1]:.2f}\n")

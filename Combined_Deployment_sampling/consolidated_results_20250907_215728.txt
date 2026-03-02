@@ -1,0 +1,19 @@
+COST-BASED DEPLOYMENT EXPERIMENT RESULTS
+============================================================
+Experiment Date: 2025-09-07 21:57:28
+Maps Processed: 14-22 (0 maps)
+Cost Threshold: 5.0
+Hexagonal Density: ~50% (every other coordinate)
+============================================================
+
+SUMMARY TABLE
+--------------------------------------------------------------------------------
+Map    Status       Nodes  Coverage   Overlap   Cost     Time(s)  Stopped By     
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Total Execution Time: 0.0s (0.0 min)
+Successful Maps: 0/0
+
+
+DETAILED RESULTS
+============================================================

@@ -265,3 +265,12 @@ start_time = time.time()
 end_time = time.time()
 deployment = IncrementalDeployment(grid_size=(300,157), num_robots=90, sensor_range=15)
 visualize(deployment)
+
+
+with open("position.txt", "w") as f:
+    for robot in deployment.robots:
+        if robot.deployed:
+            x, y = robot.position
+            f.write(f"{x:.2f}, {y:.2f}\n")
+
+print("Saved deployed robot positions to position.txt")

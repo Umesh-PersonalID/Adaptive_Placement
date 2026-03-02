@@ -1,0 +1,12 @@
+[[ True  True  True ...  True  True  True]
+ [ True  True  True ...  True  True  True]
+ [ True  True  True ...  True  True  True]
+ ...
+ [ True  True  True ...  True  True  True]
+ [ True  True  True ...  True  True  True]
+ [ True  True  True ...  True  True  True]]
+        Metric      Value
+      Coverage  95.326740
+     Overlap %  30.244149
+Deployed Nodes 146.000000
+      Time (s) 570.875452

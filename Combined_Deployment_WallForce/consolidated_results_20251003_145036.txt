@@ -1,0 +1,127 @@
+COST-BASED DEPLOYMENT EXPERIMENT RESULTS
+============================================================
+Experiment Date: 2025-10-03 14:50:36
+Maps Processed: 14-22 (9 maps)
+Cost Threshold: 5.0
+Hexagonal Density: ~50% (every other coordinate)
+============================================================
+
+SUMMARY TABLE
+--------------------------------------------------------------------------------
+Map    Status       Nodes  Coverage   Overlap   Cost     Time(s)  Stopped By     
+--------------------------------------------------------------------------------
+14     SUCCESS      136    56.30      3.43      8.0790   6746.8   COMPLETED      
+15     SUCCESS      128    55.72      3.31      9.1411   5402.6   COMPLETED      
+16     SUCCESS      144    55.98      3.43      5.5375   7543.0   COMPLETED      
+17     SUCCESS      147    56.35      3.58      4.8698   7910.2   COMPLETED      
+18     SUCCESS      139    54.48      3.30      9.9207   12008.4  COMPLETED      
+19     SUCCESS      137    55.18      3.32      8.5792   6651.3   COMPLETED      
+20     SUCCESS      128    55.85      3.28      2.2089   5197.6   COMPLETED      
+21     SUCCESS      143    55.54      3.35      7.6254   7770.5   COMPLETED      
+22     SUCCESS      142    55.00      3.28      4.9245   7441.4   COMPLETED      
+--------------------------------------------------------------------------------
+Total Execution Time: 66671.9s (1111.2 min)
+Successful Maps: 9/9
+
+
+DETAILED RESULTS
+============================================================
+
+MAP 14:
+  Status: SUCCESS
+  Execution Time: 6746.77s
+  Deployed Nodes: 136
+  Final Coverage: 56.30%
+  Final Overlap: 3.43%
+  Final Cost: 8.0790
+  Stopping Condition: COMPLETED
+  Iterations: 72
+  Cost Evolution: [4.275, 5.757, 4.637, 5.515, 8.079]
+
+MAP 15:
+  Status: SUCCESS
+  Execution Time: 5402.65s
+  Deployed Nodes: 128
+  Final Coverage: 55.72%
+  Final Overlap: 3.31%
+  Final Cost: 9.1411
+  Stopping Condition: COMPLETED
+  Iterations: 69
+  Cost Evolution: [4.892, 4.888, 7.649, 5.42, 9.141]
+
+MAP 16:
+  Status: SUCCESS
+  Execution Time: 7543.03s
+  Deployed Nodes: 144
+  Final Coverage: 55.98%
+  Final Overlap: 3.43%
+  Final Cost: 5.5375
+  Stopping Condition: COMPLETED
+  Iterations: 76
+  Cost Evolution: [4.715, 4.589, 5.042, 5.375, 5.537]
+
+MAP 17:
+  Status: SUCCESS
+  Execution Time: 7910.22s
+  Deployed Nodes: 147
+  Final Coverage: 56.35%
+  Final Overlap: 3.58%
+  Final Cost: 4.8698
+  Stopping Condition: COMPLETED
+  Iterations: 76
+  Cost Evolution: [7.242, 2.829, 4.837, 4.827, 4.87]
+
+MAP 18:
+  Status: SUCCESS
+  Execution Time: 12008.36s
+  Deployed Nodes: 139
+  Final Coverage: 54.48%
+  Final Overlap: 3.30%
+  Final Cost: 9.9207
+  Stopping Condition: COMPLETED
+  Iterations: 75
+  Cost Evolution: [8.574, 4.16, 4.736, 7.299, 9.921]
+
+MAP 19:
+  Status: SUCCESS
+  Execution Time: 6651.32s
+  Deployed Nodes: 137
+  Final Coverage: 55.18%
+  Final Overlap: 3.32%
+  Final Cost: 8.5792
+  Stopping Condition: COMPLETED
+  Iterations: 75
+  Cost Evolution: [6.214, 7.696, 8.203, 5.543, 8.579]
+
+MAP 20:
+  Status: SUCCESS
+  Execution Time: 5197.64s
+  Deployed Nodes: 128
+  Final Coverage: 55.85%
+  Final Overlap: 3.28%
+  Final Cost: 2.2089
+  Stopping Condition: COMPLETED
+  Iterations: 63
+  Cost Evolution: [1.602, 1.072, 2.165, 2.275, 2.209]
+
+MAP 21:
+  Status: SUCCESS
+  Execution Time: 7770.51s
+  Deployed Nodes: 143
+  Final Coverage: 55.54%
+  Final Overlap: 3.35%
+  Final Cost: 7.6254
+  Stopping Condition: COMPLETED
+  Iterations: 73
+  Cost Evolution: [4.374, 4.112, 4.182, 5.581, 7.625]
+
+MAP 22:
+  Status: SUCCESS
+  Execution Time: 7441.43s
+  Deployed Nodes: 142
+  Final Coverage: 55.00%
+  Final Overlap: 3.28%
+  Final Cost: 4.9245
+  Stopping Condition: COMPLETED
+  Iterations: 74
+  Cost Evolution: [7.642, 9.127, 4.712, 3.004, 4.925]

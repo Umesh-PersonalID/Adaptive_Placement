@@ -3,10 +3,20 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 img_path = "M_0013.png"
-image = Image.open(img_path).convert("L").resize((285, 300))  # Convert to grayscale and resize
+image = Image.open(img_path).convert("L").resize((300, 285))  # Convert to grayscale and resize
 
 image_array = np.array(image)
 
 grid = np.where(image_array < 128, 1, -1)
 
 unknown_mask = grid == -1
+
+with open("obstacle_map.txt", "w") as f:
+    for row in grid:
+        for cell in row:
+            if cell == -1:
+                f.write("0" + " ")
+            else:
+                f.write("1" + " ")
+        f.write("\n")
+      
