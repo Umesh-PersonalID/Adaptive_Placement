@@ -1,0 +1,8 @@
+Square Grid Placement Results - Region 6
+=========================================
+Disk radius: 2
+Grid spacing: 2.8284271247461903
+Number of disks placed: 99
+Coverage percentage: 100.00%
+Overlap percentage: 0.00%
+Region area: 601.06

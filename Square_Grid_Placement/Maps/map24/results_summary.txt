@@ -1,0 +1,8 @@
+Square Grid Placement Results - Region 2
+=========================================
+Disk radius: 2
+Grid spacing: 2.8284271247461903
+Number of disks placed: 56
+Coverage percentage: 99.87%
+Overlap percentage: 159.23%
+Region area: 271.83

@@ -1,0 +1,8 @@
+Hexagonal Grid Placement Results - Region 6
+=========================================
+Disk radius: 2
+Grid spacing: 3.4641016151377544
+Number of disks placed: 81
+Coverage percentage: 100.00%
+Overlap percentage: 69.35%
+Region area: 601.06
