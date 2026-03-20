@@ -6,7 +6,7 @@ from shapely.ops import unary_union
 from pathlib import Path
 
 
-def plot_sol(region, centers, r, m, uncovered_area, save_dir=None, save_name=None, show_plot=True):
+def plot_sol(region, centers, r, m, uncovered_area, save_dir=None, overlap_area=None, save_name=None, show_plot=True):
     fig, ax = plt.subplots(figsize=(6, 6))
 
     # --- Plot region ---
@@ -40,7 +40,7 @@ def plot_sol(region, centers, r, m, uncovered_area, save_dir=None, save_name=Non
         ax.plot(c[0], c[1], "ko", markersize=3)
 
     ax.set_aspect("equal")
-    ax.set_title(f"m = {m}, Uncovered = {uncovered_area:.6f}")
+    ax.set_title(f"m = {m}, Uncovered = {uncovered_area:.6f}, Overlap = {overlap_area:.2f}%")
     ax.grid(True)
 
     if save_dir is not None:

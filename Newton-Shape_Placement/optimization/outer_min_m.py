@@ -96,29 +96,25 @@ def minimize_number_of_disks(
     region_idx=0,
     tol=1,
     max_m=1600,
-    local_refinements=3
+    local_refinements=3,
+    trial=0
 ):
     target_area = region.area
     results_root = Path(__file__).resolve().parents[1] / "Results"
     region_output_dir = results_root / f"region_{region_idx}"
 
     m = lower_bound_m(region, r)
-    print(f"Lower bound m = {m}")
 
     lattice = hex_lattice_points(region, r)
     lattice = clip_to_region(lattice, region)
 
     if len(lattice) < m:
-        raise ValueError("Hex lattice too sparse for initial m.")
+        m = len(lattice)
 
     centers = lattice[:m]
 
     while m <= max_m:
-
-        print(f"\nSolving for m = {m}")
-
         x0 = centers.reshape(-1)
-
         x_opt, g_val = solve_inner_fixed_r(x0, region, r, m)
         centers = x_opt.reshape(m, 2)
 
@@ -136,7 +132,9 @@ def minimize_number_of_disks(
 
         centers = best_centers
 
-        print(f"m = {m}, uncovered = {best_g:.6f}")
+        #calculate overlap area
+        union = build_union(centers, r)
+        percentage_overlap = ((m * math.pi * (r**2)) - union.area) / (m * math.pi * (r**2)) * 100
 
         plot_sol(
             region,
@@ -144,15 +142,17 @@ def minimize_number_of_disks(
             r,
             m,
             best_g,
-            save_dir=region_output_dir,
-            save_name=f"m_{m}.png",
+            save_dir=region_output_dir/f"trial_{trial}",
+            overlap_area=percentage_overlap,
+            save_name=f"m_{m}_trial_{trial}.png",
             show_plot=False
         )
+        
 
         if best_g / target_area <= 0.01:
-            print("Coverage achieved.")
             return centers, m, best_g
-
+    
+ 
         new_centers = add_disk_largest_gap(centers, r, region)
         if len(new_centers) == len(centers):
             print("No valid new center found. Stopping.")

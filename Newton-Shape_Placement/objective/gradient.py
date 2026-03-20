@@ -8,7 +8,7 @@ def build_union(centers, r):
              for c in centers]
     return unary_union(disks)
 
-
+ 
 def extract_active_segments(centers, r, region):
 
     m = len(centers)

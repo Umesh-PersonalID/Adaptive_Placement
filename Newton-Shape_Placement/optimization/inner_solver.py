@@ -8,8 +8,7 @@ from utils.sampling import sample_points_in_polygon
 #hessp=lambda x, p: hessp(x, p, r, region),
 
 
-
-def solve_inner_fixed_r(X0 ,region, r, m, max_iter=700):
+def solve_inner_fixed_r(X0 ,region, r, m, max_iter=1700):
     
 
     x0 = X0.reshape(-1)
@@ -21,7 +20,7 @@ def solve_inner_fixed_r(X0 ,region, r, m, max_iter=700):
 
     def hessp(x, p, r, region, eps=1e-4):
         return (grad_G(x + eps*p, r, region) - grad_G(x, r, region)) / eps
-
+ 
     res = minimize(
         f,
         x0,
